@@ -1,0 +1,18 @@
+{
+    "MeshPath":"D:/test",
+    "OutputPath":"",
+    "OutputPSD":"False",
+    "OutputSample":8,
+    "OutputBits":8,
+    "useMultipleTextureSet":"False",
+    "ExportMaps":[
+        "Normals",
+        "ObjectNormal",
+        "Curvature",
+        "Ambient Occlusion",
+        "Material ID",
+        "Position",
+        "Thickness",
+        "Height"
+    ]
+}
