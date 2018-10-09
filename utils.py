@@ -11,9 +11,14 @@ import inspect
 import json
 import os
 import win32net
+import pprint
 # import os
 def void(*args, **kws):
     pass
+
+def infoprint(mod):
+    print(type(mod))
+    pprint(dir(mod))
 
 def readLocalFile(fileName):
     with open(getLocalFile(fileName)) as read_file:

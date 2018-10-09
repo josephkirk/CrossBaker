@@ -19,6 +19,7 @@ import sys
 import os
 import inspect
 from collections import OrderedDict
+from .enum import *
 #
 import pymel.core as pm
 

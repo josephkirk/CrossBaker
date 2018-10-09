@@ -1,53 +1,22 @@
 #/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+Marmoset Baking Layer
+
+@author: Nguyen Phi Hung
+
+"""
+
 import mset
 import os
 import json
 import inspect
 import sys
-from enum import Enum
+
+from CrossBaker import BakeMap, Import, ImportType, Padding
 from pprint import pprint
 from re import compile
-
-#Enum
-Import = Enum("Import", ["UseMeshName", "UseFileName"])
-ImportTypes = {
-    Import.UseMeshName: compile(r"(\w*)_(low|high)_?\w*.(obj|fbx)"),
-    Import.UseFileName: compile(r"(\w*).(obj|fbx)\Z")
-}
-Padding = Enum("Padding",[
-    "None", "Moderate", "Extreme"])
-BakeMap = Enum("BakeMap",[
-    "Normals",
-    "ObjectNormals",
-    "Height",
-    "Position",
-    "Curvature",
-    "Convexity",
-    "Concavity",
-    "Thickness",
-    "BentNormals",
-    "ObjectBentNormals",
-    "AO",
-    "Albedo",
-    "Gloss",
-    "Specular",
-    "Diffuse",
-    "Roughness",
-    "Metalness",
-    "Emissive",
-    "Transparency",
-    "VertexColor",
-    "DiffuseLighting",
-    "SpecularLighting",
-    "Lighting",
-    "MaterialID",
-    "ObjectID",
-    "GroupID",
-    "UVIsland",
-    "Wireframe",
-    "AlphaMask"])
 
 # Variable
 ImportType = Import.UseMeshName
@@ -61,9 +30,6 @@ if not MeshPath:
 
 # Method
 
-def infoprint(mod):
-    print(type(mod))
-    pprint(dir(mod))
 class BakeGroup:
     def __init__(self, transform):
         self.transform = transform
@@ -183,6 +149,7 @@ if __name__ == "__main__":
         path=os.path.join(MeshPath,f))
         for f in os.listdir(MeshPath) if regex.match(f))
     # files = (f for f in dirContents if os.path.isfile(f))
+
     baker = Baker()
     wrongNameGrp = mset.TransformObject("Wrong Namming")
     for mfile in files:
