@@ -22,8 +22,8 @@ def infoprint(mod):
 
 def readLocalFile(fileName):
     with open(getLocalFile(fileName)) as read_file:
-        data = read_file.read()
-    return str(data)
+        data = json.load(read_file)
+    return data
 
 def getScriptDir():
     return os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))

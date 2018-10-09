@@ -13,23 +13,20 @@ except ImportError:
     from PySide import QtCore, QtGui
     QtWidgets = QtGui
 import logging
-import uiStyle as ui
 import utils as ul
 import sys
 import os
 import inspect
 from collections import OrderedDict
-from .enum import *
+from enums import *
 #
-import pymel.core as pm
 
-from utils import  readLocalFile
-from subprocess import
-
-#
-Config = json.load(readLocalFile("config.json"))
-MarmosetPath = Config["marmoset"]
-PhotoshopPath = Config["photoshop"]
-ExPython = Config["pythonex"]
+from utils import readLocalFile, getScriptDir
+import subprocess
 
 #
+Config = readLocalFile("config.json")
+ExportSetting = readLocalFile("exportSetting.json")
+BakerPath = Config.get(ExportSetting["baker"])
+#
+print(getScriptDir())

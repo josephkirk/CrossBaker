@@ -1,1 +1,1 @@
-"C:/Program Files/Marmoset/Toolbag 3/toolbag.exe" abstract\marmosetplugin.py
+"C:/Program Files/Marmoset/Toolbag 3/toolbag.exe" baker/marmoset.py

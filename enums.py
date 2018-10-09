@@ -1,9 +1,10 @@
 from enum import Enum
+import re
 #Enum
 Import = Enum("Import", ["UseMeshName", "UseFileName"])
 ImportTypes = {
-    Import.UseMeshName: compile(r"(\w*)_(low|high)_?\w*.(obj|fbx)"),
-    Import.UseFileName: compile(r"(\w*).(obj|fbx)\Z")
+    Import.UseMeshName: re.compile(r"(\w*)_(low|high)_?\w*.(obj|fbx)"),
+    Import.UseFileName: re.compile(r"(\w*).(obj|fbx)\Z")
 }
 Padding = Enum("Padding",[
     "None", "Moderate", "Extreme"])
