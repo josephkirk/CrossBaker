@@ -24,7 +24,7 @@ from .enum import *
 import pymel.core as pm
 
 from utils import  readLocalFile
-import subprocess
+from subprocess import
 
 #
 Config = json.load(readLocalFile("config.json"))
