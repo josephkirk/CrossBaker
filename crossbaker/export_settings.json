@@ -3,10 +3,11 @@
     "MeshPath":"D:/test",
     "OutputPath":"",
     "OutputPSD":"False",
-    "OutputSample":8,
+    "OutputSize":[2048, 2048],
+    "OutputSamples":8,
     "OutputBits":8,
-    "useMultipleTextureSet":"False",
-    "ExportMaps":[
+    "UseMultipleTextureSet":"False",
+    "OutputMaps":[
         "Normals",
         "ObjectNormal",
         "Curvature",

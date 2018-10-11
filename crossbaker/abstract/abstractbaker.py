@@ -1,6 +1,6 @@
 #/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from crossBaker import BakeMap
+from crossBaker import BakeMap, abstractMethod
 
 class BakeGroup:
     def __init__(self):

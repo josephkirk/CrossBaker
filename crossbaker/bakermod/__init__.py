@@ -1,8 +1,10 @@
 #/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Abstraction Baking Layer
+Baking Mod Layer
 
 @author: Nguyen Phi Hung
 
 """
+def init():
+    from . import marmoset
