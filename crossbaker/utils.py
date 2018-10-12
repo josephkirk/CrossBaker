@@ -11,7 +11,7 @@ import inspect
 import json
 import os
 import win32net
-import pprint
+from pprint import pprint
 # import os
 def void(*args, **kws):
     pass

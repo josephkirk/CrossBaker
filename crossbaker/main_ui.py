@@ -1,7 +1,9 @@
-#/usr/bin/env python
+#/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import json
+
 import sys
+import os
+import crossbaker
 
 try:
     from PySide2 import QtCore, QtGui, QtWidgets
@@ -12,5 +14,12 @@ except:
     except:
         sys.exit()
 
-from .main_ui import UI
+class UI(object):
+    def __init__(self):
+        pass
 
+    def setupUI(self):
+        pass
+
+    def reTranslateUI(self):
+        pass

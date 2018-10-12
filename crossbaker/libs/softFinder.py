@@ -31,7 +31,7 @@ for subkey in names:
         fp = StringIO()
         traceback.print_exc(file=fp)
         errorMessage = fp.getvalue()
-        error = 'Error for ' + key + '. Message follows:\n' + errorMessagec
+        error = 'Error for ' + key + '. Message follows:\n' + errorMessage
         errorLog.write(error)
         errorLog.write("\n\n")
  

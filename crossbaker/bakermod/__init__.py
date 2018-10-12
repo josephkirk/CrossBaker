@@ -8,3 +8,4 @@ Baking Mod Layer
 """
 def init():
     from . import marmoset
+    from . import substance

@@ -1,21 +1,27 @@
 #/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-CrossBaker Initialize
 
-@author: Nguyen Phi Hung
+__appname = "CrossBaker"
+__info = "Cross Baking Packages Interface"
+__version = 1
+__revision = 0
+__state = "alpha"
+__category = ["Texture"]
+__author = "Nguyen Phi Hung"
+__email = "hung.nguyen_a@virtuosgames.com"
+__Date = 20181012
 
-"""
 import subprocess
 import glob
 import os
 import sys
 from collections import namedtuple
 
-# Setup Logging
+# * Setup Logging
 import logging as _logging
 loggerLevel = _logging.DEBUG
 logger = _logging.getLogger("__name__")
+os.environ["CROSSBAKER_LOGGER_LEVEL"] = str(_logging.DEBUG)
 _logLevel = int(os.getenv('CROSSBAKER_LOGGING_LEVEL', _logging.INFO))
 if _logLevel:
 	ch = _logging.StreamHandler(sys.stdout)
@@ -25,11 +31,10 @@ if _logLevel:
 	logger.addHandler(ch)
 	logger.setLevel(_logLevel)
 
-# Decor Methods
+#  * Decor Methods
+"""Copy from BLUR CROSS3D"""
 def abstractmethod(function):
 	""" The decorated function should be overridden by a software specific module.
-	
-	Depending on the state of the environment variable "CROSS3D_ABSTRACT_MODE" is set to 
 	"""
 	def newFunction(*args, **kwargs):
 		# when debugging, raise an error
@@ -63,7 +68,7 @@ def debugObjectString(object, msg):
 	elif inspect.isfunction(object):
 		return '[%s.%s function] :: %s' % (object.__module__, object.__name__, msg)
 
-# utils method
+# * Utils method
 from .utils import readLocalFile, getScriptDir, loadData, saveData
 
 def registerSymbol(name, value, ifNotFound=False):
@@ -77,6 +82,18 @@ def registerSymbol(name, value, ifNotFound=False):
 		return
 
 	crossbaker.__dict__[name] = value
+
+def registerBaker(name, value, ifNotFound=False):
+	"""
+		Used by the *adaptors* to register their own classes and functions as
+		part of the crossBaker.  
+	"""
+	# initialize a value in the dictionary
+	import crossbaker
+	if ifNotFound and name in crossbaker.bakermod.__dict__:
+		return
+
+	crossbaker.bakermod.__dict__[name] = value
 
 def _methodNames():
 	"""
@@ -99,6 +116,34 @@ class ExportSetting(object):
 	"""
 	__instance__ = None
 	def __new__(cls, path="export_settings.json"):
+		if not cls.__instance__:
+			cls.__instance__ = super(ExportSetting, cls).__new__(cls)
+			# cls.__instance__.__init__()
+			cls.__instance__.__data = cls.getExportSetting(path)
+		return cls.__instance__
+
+	# def __init__(self):
+	# 	pass
+
+	def __call__(self, path=""):
+		instance = self.__class__()
+		if os.path.exists(path):
+			instance.__data = cls.getExportSetting(path)
+		for key, value in instance.__data.items():
+			if key == "OutputSize":
+				instance.outputSize = Size(*instance.__data.get("OutputSize", [2048, 2048]))
+				continue
+			instance.__dict__[key.lower()[0] + key[1:]] = value
+		return instance
+
+	def init(self):
+		return self()
+
+	def getSetting(self, attrname):
+		return self().__data.get(attrname)
+
+	@staticmethod
+	def getExportSetting(path):
 		try:
 			# read Path from relative
 			_exportSettings = readLocalFile(path)
@@ -108,20 +153,7 @@ class ExportSetting(object):
 				_exportSettings = loadData(path)
 			except:
 				_exportSettings = {}
-		if not cls.__instance__:
-			cls.__instance__ = super(ExportSetting, cls).__new__(cls)
-			cls.__instance__._data = _exportSettings
-		for key, value in _exportSettings.items():
-			if key == "OutputSize":
-				cls.__instance__.outputSize = Size(*_exportSettings.get("OutputSize", [2048, 2048]))
-				continue
-			cls.__instance__.__dict__[key.lower()[0] + key[1:]] = value
-		return cls.__instance__
-
-	@classmethod
-	def getSetting(cls, attrname):
-		return cls.__instance__._data.get(attrname)
-
+		return _exportSettings
 
 class Bakers(object):
 	"""
@@ -129,6 +161,73 @@ class Bakers(object):
 	"""
 	__instance__ = None
 	def __new__(cls, path="config.json"):
+
+		if not cls.__instance__:
+			cls.__instance__ = super(Bakers, cls).__new__(cls)
+			# cls.__instance__.__init__()
+			cls.__instance__.__allApps = cls.getConfig(path)
+			cls.__instance__.__availApps = {}
+
+		return cls.__instance__
+
+	def __call__(self, path=""):
+		instance = self.__class__()
+		if os.path.exists(path):
+			instance.__data = self.getConfig(path)
+		import crossbaker
+		for bakername, bakerpath in instance.__allApps.items():
+			if not os.path.exists(bakerpath):
+				continue
+			if bakername == "pythonexternal":
+				crossbaker.externalPython = bakername
+				continue
+			elif bakername == "photoshop":
+				crossbaker.photoshop = bakername
+				continue
+			logger.debug('Baker Application: "{}" found.'.format(bakername.capitalize()))
+			instance.__availApps[bakername] = BakerApp(bakername, bakerpath)
+		# Attemp to aquire execution module for baker application
+		for bakerapp in instance.__availApps:
+			if bakerapp in crossbaker.bakermod.__dict__:
+				instance.__availApps[bakerapp].mod = crossbaker.bakermod.__dict__[bakerapp]
+		# register Baker as class Attribute
+		instance.__dict__.update(instance.__availApps)
+		return instance
+
+	def __iter__(self):
+		self.__bakerid = 0
+		return self()
+
+	def __next__(self):
+		if self.__bakerid >= len(self.__availApps):
+			raise StopIteration
+		baker = list(self.__availApps.values())[self.__bakerid]
+		self.__bakerid += 1
+		return baker
+
+	# def __init__(self):
+	# 	pass
+
+	def init(self):
+		return self()
+
+	def current(self):
+		return self().get(ExportSetting().baker)
+
+	def run(self):
+		return self.current().run()
+
+	def get(self, bakerName):
+		return self().__availApps.get(bakerName)
+
+	def count(self):
+		return len(self().__availApps.keys())
+
+	def countAll(self):
+		return len(self().__allApps.keys())
+
+	@staticmethod
+	def getConfig(path):
 		try:
 			# read Path from relative
 			_config = readLocalFile(path)
@@ -138,42 +237,7 @@ class Bakers(object):
 				_config = loadData(path)
 			except:
 				_config = {}
-		if not cls.__instance__:
-			cls.__instance__ = super(Bakers, cls).__new__(cls)
-			cls.__instance__.__allApps = _config
-			cls.__instance__.__availApps = {}
-
-		import crossbaker
-		for bakername, bakerpath in _config.items():
-			if bakername == "pythonexternal":
-				crossbaker.externalPython = bakername
-				continue
-			if os.path.exists(bakerpath):
-				logger.debug('Baker Application: "{}" found.'.format(bakername.capitalize()))
-				cls.__instance__.__availApps[bakername] = BakerApp(bakername, bakerpath)
-		# Attemp to aquire execution module for baker application
-		for bakerapp in cls.__instance__.__availApps:
-			if bakerapp in crossbaker.bakermod.__dict__:
-				cls.__instance__.__availApps[bakerapp].mod = crossbaker.bakermod.__dict__[bakerapp]
-		# register Baker as class Attribute
-		cls.__instance__.__dict__.update(cls.__instance__.__availApps)
-		return cls.__instance__
-
-	@classmethod
-	def current(cls):
-		return cls.__instance__.get(ExportSetting().baker)
-
-	@classmethod
-	def get(cls, bakerName):
-		return cls.__instance__.__availApps.get(bakerName)
-
-	@classmethod
-	def count(cls):
-		return len(cls.__instance__.__availApps.keys())
-
-	@classmethod
-	def countAll(cls):
-		return len(cls.__instance__.__allApps.keys())
+		return _config
 
 def init():
 	for modname in _methodNames():
@@ -192,31 +256,31 @@ def init():
 			break
 		except:
 			continue
-
-	exportSetting()
-	bakers()
+	
+	## Register Setting
+	exportSetting.init()
+	bakers.init()
 # ----- #
 
-# ***Init crossbaker***
-os.environ["CROSSBAKER_LOGGER_LEVEL"] = str(_logging.DEBUG)
-## Init Setting
-logger.debug(getScriptDir())
-
-## Init Enum and Constants
+## Init Enum and BaseClass
 from .enums import \
     Import, \
     ImportTypes, \
     Padding, \
     BakeMap
 
-from .constants import \
+from .libs.classes import \
 	Size, \
 	BakerApp
-##
 
-## Register internalMethod
-exportSetting = ExportSetting
-bakers = Bakers
+# * Init crossbaker
+Config = "config.json"
+Setting = "export_settings.json"
+UserConfig = os.path.join(os.getenv("LOCALAPPDATA"),"crossbake/{}".format(Config))
+UserSetting = os.path.join(os.getenv("LOCALAPPDATA"),"crossbake/{}".format(Setting))
 
-##
+## Init Setting
+logger.debug(getScriptDir())
+exportSetting =  ExportSetting(Setting)
+bakers = Bakers(Config)
 init()
