@@ -1,3 +1,9 @@
 {
-    "python.pythonPath": "D:\\Env\\Continuum\\miniconda3\\envs\\qtappdev511\\python.exe"
+    "python.pythonPath": "D:\\envs\\Miniconda3\\envs\\qtappdev\\python.exe",
+    "python.unitTest.pyTestArgs": [
+        "crossbaker"
+    ],
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.pyTestEnabled": true
 }

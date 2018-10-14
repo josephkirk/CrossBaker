@@ -59,15 +59,15 @@ BakeMap = Enum("BakeMap",[
     "AlphaMask"])
 
 # Variable
-ImportType = Import.UseFileName
-MeshPath = D:/test
-SavePath = D:/test
-ExportPath = 
-BakeMaps = ['Normals', 'ObjectNormal', 'Curvature', 'Ambient Occlusion', 'Material ID', 'Position', 'Thickness', 'Height']
-OutputWidth = 2048
-OutputHeight = 2048
-OutputSamples = 8
-OutputBits = 8
+ImportType = $import_type
+MeshPath = $mesh_path
+SavePath = $save_path
+ExportPath = $export_path
+BakeMaps = $bakemaps
+OutputWidth = $outputs_width
+OutputHeight = $outputs_height
+OutputSamples = $outputs_samples
+OutputBits = $outputs_bits
 
 
 if not MeshPath:

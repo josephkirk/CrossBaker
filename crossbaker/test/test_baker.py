@@ -1,6 +1,8 @@
 import pytest
 
-# def test_run_current_baker():
-#     import crossbaker
-#     assert crossbaker.bakers.run(), "exec {} using {} failed".format(
-#         crossbaker.bakers.current().name, crossbaker.bakers.current().mod)
+def test_run_current_baker():
+    import crossbaker
+    print("exec {} baker using arguments: {}".format(
+        crossbaker.bakers.current().path, crossbaker.bakers.current().mod.get()))
+    crossbaker.bakers.current().run()
+    assert False

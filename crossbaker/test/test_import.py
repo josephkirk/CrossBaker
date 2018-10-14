@@ -42,7 +42,7 @@ def test_get_baker_attribute():
         print("Mod for {} is {}, type:{}, path:{}".format(baker.name, baker.mod or "Not Found", type(baker.mod), baker.mod.__path__))
     print("-"*20)
         # assert baker.mod, "\n{sep}\nNo mod for {bakername}\n{sep}\n".format(bakername=baker.name, sep="-"*20)
-    assert False
+    assert True
 
 def test_register_baker():
     import crossbaker

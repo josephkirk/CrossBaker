@@ -2,13 +2,17 @@
 # -*- coding: utf-8 -*-
 from collections import namedtuple
 from crossbaker import logger
-Size = namedtuple("Size", ["x","y"])
+import subprocess
+import os
+
+Size = namedtuple("Size", ["w","h"])
 
 class BakerApp(object):
     def __init__(self, name, path, execmod=""):
         self.name = name
-        self.path = path
+        self.path = os.path.normpath(path)
         self.mod = execmod
+
 
     def __str__(self):
         return self.path
@@ -17,5 +21,6 @@ class BakerApp(object):
         return "{}:{}".format(self.name, self.path)
 
     def run(self):
-        logger.debug("exec {} using {}".format(self.name, self.mod))
-        return False
+        logger.debug("exec {} with args: {}".format(self.name, self.mod.get()))
+        com = subprocess.call(["{}".format(self.path)]+self.mod.get())
+        # com.communicate()
