@@ -139,7 +139,7 @@ class ExportSetting(object):
 	def init(self):
 		return self()
 
-	def getSetting(self, attrname):
+	def get(self, attrname):
 		return self().__data.get(attrname)
 
 	@staticmethod
