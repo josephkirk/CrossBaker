@@ -1,7 +1,8 @@
 #  Crossbaker
 Interface to communicate across multiple baking packages
 
-> ## *Design*
+## *Design*
+-----
 ```mermaid
 graph LR
 DCC(DCC App) --TCP/IP--- UI[Qt UI]
@@ -21,21 +22,22 @@ BK --Result--> IC
 
 ```
 
-#  Usage
+##  *Usage*
+-----
 ```python
 import crossbaker
 crossbaker.initUI()
 ```
-##  config.json
+###  config.json
 > Path to baking application.
 
-##  export_setting.json
+###  export_setting.json
 > Setting to feed baking application.
 
-##  crossbaker.exportSettings
+###  crossbaker.exportSettings
 > Contain all setting to export with
 
-##  crossbaker.bakers
+###  crossbaker.bakers
 > Iterable contain all available baker found in system.
 >```python
 > crossbaker.bakers.count(): #return available bakers count.
@@ -47,7 +49,7 @@ crossbaker.initUI()
 > crossbaker.bakers.substance
 >```
 
-## crossbaker.exportSettings
+### crossbaker.exportSettings
 >Iterable contain settings to run baker with.
 >```python
 >crossbaker.exportSettings.get(settingname) #: get setting by name.
@@ -65,7 +67,7 @@ crossbaker.initUI()
 >```
 
 ## Classes
-## crossbaker.BakerApp
+### crossbaker.BakerApp
 >```python
 >"""
 >::param name : str : baking application name.
@@ -73,4 +75,4 @@ crossbaker.initUI()
 >::method run : run subprocess call baker app with setting from exportSettings.
 >"""
 >```
-## crossbaker.ImageApp
+### crossbaker.ImageApp

@@ -271,7 +271,8 @@ from .enums import \
 
 from .libs.classes import \
 	Size, \
-	BakerApp
+	BakerApp, \
+	ImageApp
 
 # * Init crossbaker
 Config = "config.json"
