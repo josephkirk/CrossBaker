@@ -11,10 +11,7 @@ __author = "Nguyen Phi Hung"
 __email = "hung.nguyen_a@virtuosgames.com"
 __Date = 20181012
 
-import subprocess
-import glob
-import os
-import sys
+import os, stat, glob, shutil, sys, subprocess
 from collections import namedtuple
 
 # * Setup Logging
@@ -69,7 +66,7 @@ def debugObjectString(object, msg):
 		return '[%s.%s function] :: %s' % (object.__module__, object.__name__, msg)
 
 # * Utils method
-from .utils import readLocalFile, getScriptDir, loadData, saveData
+from .utils import readLocalFile, getScriptDir, loadData, saveData, getLocalFile
 
 def registerSymbol(name, value, ifNotFound=False):
 	"""
@@ -275,13 +272,28 @@ from .libs.classes import \
 	ImageApp
 
 # * Init crossbaker
-Config = "config.json"
-Setting = "export_settings.json"
-UserConfig = os.path.join(os.getenv("LOCALAPPDATA"),"crossbake/{}".format(Config))
-UserSetting = os.path.join(os.getenv("LOCALAPPDATA"),"crossbake/{}".format(Setting))
+## Setup configuration
+Config = "config/config.json"
+Setting = "config/export_settings.json"
+TempPath = os.path.join(os.getenv("LOCALAPPDATA"), __appname)
+UserConfig = os.path.normpath(os.path.join(TempPath, Config))
+UserSetting = os.path.normpath(os.path.join(TempPath, Setting))
+
+Clean = False
+if Clean:
+	def remove_readonly(func, path, _):
+		"Clear the readonly bit and reattempt the removal"
+		os.chmod(path, stat.S_IWRITE)
+		func(path)
+	shutil.rmtree(TempPath, onerror=remove_readonly)
+
+if not os.path.isdir(TempPath):
+	os.mkdir(TempPath)
+if not os.path.isdir(TempPath+"/config"):
+	shutil.copytree(getLocalFile("config"), TempPath+"/config")
 
 ## Init Setting
 logger.debug(getScriptDir())
-exportSetting =  ExportSetting(Setting)
-bakers = Bakers(Config)
+exportSetting =  ExportSetting(UserSetting)
+bakers = Bakers(UserConfig)
 init()

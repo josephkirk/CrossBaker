@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "D:\\envs\\Miniconda3\\envs\\qtappdev\\python.exe",
+    "python.pythonPath": "D:\\Env\\Continuum\\miniconda3\\envs\\qtappdev511\\python.exe",
     "python.unitTest.pyTestArgs": [
         "crossbaker"
     ],

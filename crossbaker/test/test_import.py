@@ -13,18 +13,20 @@ def getFile(fpath):
     return os.path.join(getScriptRoot(), fpath)
 
 def test_config_exists():
-    assert os.path.exists(getFile("config.json"))
+    import crossbaker
+    assert os.path.exists(getFile(crossbaker.Config))
 
 def test_setting_exists():
-    assert os.path.exists(getFile("export_settings.json"))
+    import crossbaker
+    assert os.path.exists(getFile(crossbaker.Setting))
 
 def test_exportSetting_attributes():
     import crossbaker
-    with open(getFile("export_settings.json")) as setting:
+    with open(getFile(crossbaker.Setting)) as setting:
         data = json.load(setting)
     for i, value in data.items():
         assert hasattr(crossbaker.exportSetting, i.lower()[0] + i[1:])
-        assert crossbaker.exportSetting.getSetting(i) == value
+        assert crossbaker.exportSetting.get(i) == value
 
 def test_get_current_baker():
     import crossbaker

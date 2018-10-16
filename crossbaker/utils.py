@@ -37,7 +37,7 @@ def loadData(filePath):
         return json.load(read_file)
 
 def getLocalFile(fileName):
-    return os.path.normpath(os.path.join(getScriptDir(), fileName))
+    return os.path.normpath(os.path.abspath(os.path.join(getScriptDir(), fileName)))
 
 def saveLocalData(data, fileName, ext="json"):
     saveData(data, os.path.join(getScriptDir(),"{}.{}".format(fileName, ext)))

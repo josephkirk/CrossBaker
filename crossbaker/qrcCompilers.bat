@@ -1,2 +1,2 @@
-:: D:\Env\Continuum\miniconda3\envs\qtappdev511\Lib\site-packages\PySide2\pyside2-rcc -o %~dp0Delishot_rc.py %~dp0DeliShot.qrc
-D:\Envs\miniconda3\envs\qtappdev\Lib\site-packages\PySide2\pyside2-rcc -o %~dp0qml_rc.py %~dp0ui\qml.qrc
+D:\Env\Continuum\miniconda3\envs\qtappdev511\Lib\site-packages\PySide2\pyside2-rcc -o %~dp0application_rc.py %~dp0ui\application.qrc
+:: D:\Envs\miniconda3\envs\qtappdev\Lib\site-packages\PySide2\pyside2-rcc -o %~dp0application_rc.py %~dp0ui\application.qrc

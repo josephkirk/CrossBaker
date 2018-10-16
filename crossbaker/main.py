@@ -21,14 +21,15 @@ Qt = QC.Qt
 Signal = QC.Signal
 Slot = QC.Slot
 
-import qml_rc
+import application_rc
 
 def main():
     app = QG.QGuiApplication( sys.argv )
+    app.setAttribute(Qt.AA_EnableHighDpiScaling)
+    app.setAttribute(Qt.AA_UseOpenGLES)
     qmlFile = os.path.join( os.path.dirname(__file__), "ui/main.qml" )
     engine = QML.QQmlApplicationEngine(QC.QUrl.fromLocalFile( os.path.abspath( qmlFile ) ))
     return app.exec_()
-
 
 if __name__ == '__main__':
     main()
