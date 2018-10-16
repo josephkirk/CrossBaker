@@ -9,34 +9,33 @@ Page {
     width: 400
     height: 800
 
+    Label {
+        id:homePageLabel
+        text: qsTr("You are on the home page.")
+        anchors.top: parent.top
+        margins.bottom: 50
+        color: "white"
+    }
 
-    ScrollView {
-        anchors.fill: parent
-        Column {
-            spacing: 2
-            Label {
-                text: qsTr("You are on the home page.")
-            }
-
-            TreeView {
-                id: objectview
-                FolderListModel {
-                    id: folderModel
-                    nameFilters: ["*.obj", "*.fbx"]
-                    rootFolder: "D:/test/marmosetBaker"
-                    showDirs: true
-                    showDotAndDotDot: true
-                }
-                model: folderModel
-                selection: ItemSelectionModel {
-                    model: folderModel
-                }
-                TableViewColumn {
-                    title: "Name"
-                    role: "fileName"
-                }
-
-            }
+    TreeView {
+        id: objectview
+        anchors.fill: parent.fill
+        anchors.top: homePageLabel.bottom
+        width:parent.width
+        FolderListModel {
+            id: folderModel
+            nameFilters: ["*.obj", "*.fbx"]
+            rootFolder: "D:/test/marmosetBaker"
+            showDirs: true
+            showDotAndDotDot: true
+        }
+        model: folderModel
+        selection: ItemSelectionModel {
+            model: folderModel
+        }
+        TableViewColumn {
+            title: "Name"
+            role: "fileName"
         }
     }
 }

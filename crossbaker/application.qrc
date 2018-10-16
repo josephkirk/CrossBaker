@@ -2,8 +2,8 @@
     <qresource prefix="/">
         <file>ui/main.qml</file>
         <file>ui/HomeForm.ui.qml</file>
-        <file>ui/Page1Form.ui.qml</file>
-        <file>ui/Page2Form.ui.qml</file>
+        <file>ui/ConfigsForm.ui.qml</file>
+        <file>ui/SettingForm.ui.qml</file>
         <file>ui/qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

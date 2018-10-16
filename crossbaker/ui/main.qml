@@ -1,4 +1,4 @@
-import QtQuick 2.11
+import QtQuick 2.5
 import QtQuick.Controls 2.4
 
 ApplicationWindow {
@@ -47,21 +47,21 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
-                text: qsTr("Page 1")
+                text: qsTr("Setting")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page1Form.ui.qml")
+                    stackView.push("SettingForm.ui.qml")
                     drawer.close()
-                    toolheader.text = "Page 1"
+                    toolheader.text = "Setting"
                 }
             }
             ItemDelegate {
-                text: qsTr("Page 2")
+                text: qsTr("Config")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page2Form.ui.qml")
+                    stackView.push("ConfigsForm.ui.qml")
                     drawer.close()
-                    toolheader.text = "Page 2"
+                    toolheader.text = "Config"
                 }
             }
         }
@@ -76,7 +76,3 @@ ApplicationWindow {
     }
 }
 
-/*##^## Designer {
-    D{i:0;height:800;width:400}
-}
- ##^##*/
