@@ -9,33 +9,16 @@ Page {
     width: 400
     height: 800
 
-    Label {
-        id:homePageLabel
-        text: qsTr("You are on the home page.")
-        anchors.top: parent.top
-        margins.bottom: 50
-        color: "white"
-    }
-
     TreeView {
         id: objectview
-        anchors.fill: parent.fill
-        anchors.top: homePageLabel.bottom
-        width:parent.width
-        FolderListModel {
-            id: folderModel
-            nameFilters: ["*.obj", "*.fbx"]
-            rootFolder: "D:/test/marmosetBaker"
-            showDirs: true
-            showDotAndDotDot: true
-        }
-        model: folderModel
+        anchors.fill: parent
+        model: assetModel
         selection: ItemSelectionModel {
-            model: folderModel
+            model: assetModel
         }
         TableViewColumn {
             title: "Name"
-            role: "fileName"
+            role: "name"
         }
     }
 }

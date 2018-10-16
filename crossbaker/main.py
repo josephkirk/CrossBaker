@@ -20,15 +20,29 @@ QQ = QtQuick
 Qt = QC.Qt
 Signal = QC.Signal
 Slot = QC.Slot
-
+from libs.assetmodels import AssetModel
 import application_rc
 
 def main():
     app = QG.QGuiApplication( sys.argv )
     app.setAttribute(Qt.AA_EnableHighDpiScaling)
     app.setAttribute(Qt.AA_UseOpenGLES)
+
+    engine = QML.QQmlApplicationEngine()
     qmlFile = os.path.join( os.path.dirname(__file__), "ui/main.qml" )
-    engine = QML.QQmlApplicationEngine(QC.QUrl.fromLocalFile( os.path.abspath( qmlFile ) ))
+    # context = QML.QQmlContext(engine.rootContext())
+    headers = ("Title", "Description")
+
+    file = QtCore.QFile(os.path.join( os.path.dirname(__file__), "samples/editabletreemodel/default.txt" ))
+    file.open(QtCore.QIODevice.ReadOnly)
+    assetModel = AssetModel(headers, "str(file.readAll())")
+
+    engine.load(QC.QUrl.fromLocalFile( os.path.abspath( qmlFile ) ))
+    engine.rootContext().setContextProperty("assetModel", assetModel)
+    # context.setContextProperty("assetModel", assetModel)
+    # component.loadUrl(QC.QUrl.fromLocalFile( os.path.abspath( qmlFile ) ))
+    # component = QML.QQmlComponent(engine.rootContext())
+    # component.create(context)
     return app.exec_()
 
 if __name__ == '__main__':
