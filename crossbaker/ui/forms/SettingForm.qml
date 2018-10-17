@@ -3,8 +3,7 @@ import QtQuick.Controls 2.4
 
 Page {
     width: 400
-    height: 400
-
+    height: 800
     title: qsTr("Page 1")
 
     Label {

@@ -20,30 +20,54 @@ QQ = QtQuick
 Qt = QC.Qt
 Signal = QC.Signal
 Slot = QC.Slot
-from libs.assetmodels import AssetModel
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+from crossbaker.libs.assetmodels import AssetModel
+import crossbaker
 import application_rc
 
-def main():
-    app = QG.QGuiApplication( sys.argv )
-    app.setAttribute(Qt.AA_EnableHighDpiScaling)
-    app.setAttribute(Qt.AA_UseOpenGLES)
+class Baker(QC.QObject):
+    def __init__(self):
+        super().__init__()
 
-    engine = QML.QQmlApplicationEngine()
-    qmlFile = os.path.join( os.path.dirname(__file__), "ui/main.qml" )
-    # context = QML.QQmlContext(engine.rootContext())
-    headers = ("Title", "Description")
+    @Slot(result=str)
+    def run(self):
+        crossbaker.bakers.current().run()
 
-    file = QtCore.QFile(os.path.join( os.path.dirname(__file__), "samples/editabletreemodel/default.txt" ))
-    file.open(QtCore.QIODevice.ReadOnly)
-    # print(str(file.readAll()))
-    assetModel = AssetModel(headers, str(file.readAll()))
-    engine.load(QC.QUrl.fromLocalFile( os.path.abspath( qmlFile ) ))
-    engine.rootContext().setContextProperty("assetModel", assetModel)
-    # context.setContextProperty("assetModel", assetModel)
-    # component.loadUrl(QC.QUrl.fromLocalFile( os.path.abspath( qmlFile ) ))
-    # component = QML.QQmlComponent(engine.rootContext())
-    # component.create(context)
-    return app.exec_()
+class Main:
+    def __init__(self):
+        app = QG.QGuiApplication( sys.argv )
+        app.setAttribute(Qt.AA_EnableHighDpiScaling)
+        app.setAttribute(Qt.AA_UseOpenGLES)
+
+        engine = QML.QQmlApplicationEngine()
+        engine.objectCreated.connect(self.setWindow)
+        qmlFile = os.path.join( os.path.dirname(__file__), "ui/main.qml" )
+        headers = ("Title", "Description")
+
+        file = QtCore.QFile(os.path.join( os.path.dirname(__file__), "samples/editabletreemodel/default.txt" ))
+        file.open(QtCore.QIODevice.ReadOnly)
+        assetModel = AssetModel(headers, str(file.readAll()))
+
+        # file = os.path.join( os.path.dirname(__file__), "config/layers.json" )
+        # with open(file, "r") as readfile:
+        #     assetModel = json.load(readfile)
+        bakers = Baker()
+        root = engine.rootContext()
+        root.setContextProperty("assetModel", assetModel)
+        root.setContextProperty("bakers", bakers)
+        engine.load(QC.QUrl.fromLocalFile( os.path.abspath( qmlFile ) ))
+        # root().contextObject().show()
+        # engine.show()
+        self.show()
+        app.exec_()
+
+    def show(self):
+        if self.window:
+            self.window.flags = Qt.Window | Qt.WindowStaysOnTopHint
+            getattr(self.window,"raise")()
+
+    def setWindow(self, win, url):
+        self.window = win
 
 if __name__ == '__main__':
-    main()
+    main = Main()

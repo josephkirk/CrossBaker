@@ -1,19 +1,28 @@
-import QtQuick 2.5
+import QtQuick 2.11
 import QtQuick.Controls 2.4
+
 
 ApplicationWindow {
     id: window
+    // flags: Qt.Window
+    // objectname: "mainwindow"
+    title: qsTr("Cross Baker")
     visible: true
+    // active: true
+    // flags: Qt.Window
     width: 400
     height: 800
-    title: qsTr("Cross Baker")
+    maximumWidth: 400
+    maximumHeight: 800
+    minimumWidth: 200
+    minimumHeight: 400
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
 
         Label {
             id: toolheader
-            text: "Main"
+            text: "Setup"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:parent.left
             anchors.leftMargin: 20
@@ -28,7 +37,6 @@ ApplicationWindow {
             onClicked: {
                 if (stackView.depth > 1) {
                     stackView.pop()
-                    toolheader.text = "Main"
                 } else {
                     drawer.open()
                 }
@@ -50,7 +58,7 @@ ApplicationWindow {
                 text: qsTr("Setting")
                 width: parent.width
                 onClicked: {
-                    stackView.push("SettingForm.ui.qml")
+                    stackView.push("forms/SettingForm.qml")
                     drawer.close()
                     toolheader.text = "Setting"
                 }
@@ -59,8 +67,7 @@ ApplicationWindow {
                 text: qsTr("Config")
                 width: parent.width
                 onClicked: {
-                    stackView.push("ConfigsForm.ui.qml", {model: assetModel})
-                    console.log(assetModel)
+                    stackView.push("forms/ConfigsForm.qml")
                     drawer.close()
                     toolheader.text = "Config"
                 }
@@ -70,9 +77,11 @@ ApplicationWindow {
 
     StackView {
         id: stackView
-        initialItem: "HomeForm.ui.qml"
         anchors.fill: parent
-        width: window.width
+        Component.onCompleted: {
+            stackView.push(
+                "forms/HomeForm.qml", {model:assetModel, baker:bakers})
+        }
 
     }
 }

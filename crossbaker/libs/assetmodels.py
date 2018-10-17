@@ -92,11 +92,15 @@ class AssetModel(QtCore.QAbstractItemModel):
         super().__init__(parent)
 
         rootData = [header for header in headers]
+        self.m_roles = {header.lower():QtCore.Qt.UserRole+id+1 for id,header in enumerate(headers)}
         self.rootItem = AssetItem(rootData)
         self.setupModelData(data.split("\n"), self.rootItem)
 
     def columnCount(self, parent=QtCore.QModelIndex()):
         return self.rootItem.columnCount()
+
+    def rolesname(self):
+        return self.m_roles
 
     def data(self, index, role):
         if not index.isValid():
@@ -104,8 +108,8 @@ class AssetModel(QtCore.QAbstractItemModel):
 
         if role != QtCore.Qt.DisplayRole and role != QtCore.Qt.EditRole:
             return None
-
         item = self.getItem(index)
+        # print(item.data(index.column()))
         return item.data(index.column())
 
     def flags(self, index):
