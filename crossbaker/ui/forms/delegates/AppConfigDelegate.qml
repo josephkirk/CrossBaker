@@ -10,12 +10,12 @@ Component {
             Row {
                 spacing: 5
                 Label { text: '<b>App Name:</b> '}
-                TextField { placeholderText: name }
+                TextField { placeholderText: appname }
             }
             Row {
                 spacing: 5
                 Label { text: '<b>Path:</b>'}
-                TextField { placeholderText: number }
+                TextField { placeholderText: apppath }
             }
         }
     }

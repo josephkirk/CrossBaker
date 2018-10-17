@@ -67,7 +67,7 @@ ApplicationWindow {
                 text: qsTr("Config")
                 width: parent.width
                 onClicked: {
-                    stackView.push("forms/ConfigsForm.qml")
+                    stackView.push("forms/ConfigsForm.qml", {bakerconfigs:bakerconfigs})
                     drawer.close()
                     toolheader.text = "Config"
                 }
@@ -80,7 +80,7 @@ ApplicationWindow {
         anchors.fill: parent
         Component.onCompleted: {
             stackView.push(
-                "forms/HomeForm.qml", {model:assetModel, baker:bakers})
+                "forms/HomeForm.qml", {model:assetModel, baker:baker, bakers:bakers})
         }
 
     }

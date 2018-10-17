@@ -9,12 +9,9 @@ Page {
     height: 800
     contentWidth: width
     contentHeight: height
-    property var model: undefined
-    property var baker: undefined
-    property var json: [
-        {name:"bakerGroup", ob:"low"},
-        {name:"bakerGroup2", ob:"low"}
-    ]
+    property var model
+    property var baker
+    property var bakers
     Column {
         // leftPadding: 5
         Rectangle {
@@ -36,12 +33,8 @@ Page {
                 }
                 ComboBox {
                     anchors.verticalCenter: parent.verticalCenter
-                    horizontalAlignment: ComboBox.AlignRight
                     width: 200
-                    model: [
-                        "Marmoset",
-                        "Substance",
-                    ]
+                    model: bakers
                 }
             }
         }
@@ -60,7 +53,7 @@ Page {
             }
             Component.onCompleted: {
                 if (model!= undefined) {
-                    model:homepage.model
+                    model: model
                 }
             }
         }

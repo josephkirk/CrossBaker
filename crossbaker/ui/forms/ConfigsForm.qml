@@ -8,6 +8,7 @@ Page {
     height: 800
     contentWidth: 400
     contentHeight: 800
+    property var bakerconfigs
     Column {
         spacing: 10
         Label {
@@ -18,28 +19,10 @@ Page {
         ListView {
             width: parent.width
             height: 600
-            model: appmodel
+            model: bakerconfigs
             delegate: AppConfigDelegate {}
             highlight: Rectangle { color: "lightsteelblue"; radius: 2 }
         }
     }
-
-    ListModel {
-        id: appmodel
-        ListElement {   
-            name: "Marmoset"
-            number: "marmorset.exe"
-        }
-        ListElement {
-            name: "Substance"
-            number: "sbsbaker.exe"
-        }
-        ListElement {
-            name: "xnormal"
-            number: "xnormal.exe"
-        }
-    }
-
-
 
 }

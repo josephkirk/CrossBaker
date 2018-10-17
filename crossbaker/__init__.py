@@ -202,6 +202,12 @@ class Bakers(object):
 		self.__bakerid += 1
 		return baker
 
+	def allBakers(self):
+		return self().__allApps
+
+	def bakernames(self):
+		return [b.capitalize() for b in self().__availApps.keys()]
+
 	# def __init__(self):
 	# 	pass
 
