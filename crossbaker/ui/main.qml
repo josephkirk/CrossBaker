@@ -59,7 +59,8 @@ ApplicationWindow {
                 text: qsTr("Config")
                 width: parent.width
                 onClicked: {
-                    stackView.push("ConfigsForm.ui.qml")
+                    stackView.push("ConfigsForm.ui.qml", {model: assetModel})
+                    console.log(assetModel)
                     drawer.close()
                     toolheader.text = "Config"
                 }

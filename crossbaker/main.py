@@ -35,8 +35,8 @@ def main():
 
     file = QtCore.QFile(os.path.join( os.path.dirname(__file__), "samples/editabletreemodel/default.txt" ))
     file.open(QtCore.QIODevice.ReadOnly)
-    assetModel = AssetModel(headers, "str(file.readAll())")
-
+    # print(str(file.readAll()))
+    assetModel = AssetModel(headers, str(file.readAll()))
     engine.load(QC.QUrl.fromLocalFile( os.path.abspath( qmlFile ) ))
     engine.rootContext().setContextProperty("assetModel", assetModel)
     # context.setContextProperty("assetModel", assetModel)

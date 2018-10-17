@@ -4,21 +4,19 @@ import QtQuick.Controls 1.4
 import Qt.labs.folderlistmodel 2.11
 import QtQml.Models 2.11
 Page {
-    id: homePage
+    id: homepage
     title: qsTr("Home")
     width: 400
     height: 800
-
+    property var model
     TreeView {
         id: objectview
         anchors.fill: parent
-        model: assetModel
-        selection: ItemSelectionModel {
-            model: assetModel
-        }
         TableViewColumn {
             title: "Name"
-            role: "name"
+        }
+        Component.onCompleted: {
+            model:homepage.model
         }
     }
 }
