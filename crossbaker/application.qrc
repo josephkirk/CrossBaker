@@ -4,7 +4,6 @@
         <file>ui/forms/HomeForm.qml</file>
         <file>ui/forms/ConfigsForm.qml</file>
         <file>ui/forms/SettingForm.qml</file>
-        <file>ui/delegates/AppConfigDelegate.qml</file>
         <file>ui/qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

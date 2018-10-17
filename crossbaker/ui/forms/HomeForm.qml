@@ -24,9 +24,9 @@ Page {
             color: "gray"
             Row {
                 leftPadding: 15
-                anchors.verticalCenter: parent.verticalCenter
                 spacing: 10
                 Label {
+                    anchors.verticalCenter: parent.verticalCenter
                     text: "Baker"
                     width: 100
                     color: "white"
@@ -36,6 +36,7 @@ Page {
                 }
                 ComboBox {
                     anchors.verticalCenter: parent.verticalCenter
+                    horizontalAlignment: ComboBox.AlignRight
                     width: 200
                     model: [
                         "Marmoset",

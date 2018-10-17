@@ -1,6 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
-import "AppConfigDelegate.qml" as AppDelegate
+import "delegates"
 Page {
     id: configpage
     title: qsTr("Config")
@@ -19,7 +19,7 @@ Page {
             width: parent.width
             height: 600
             model: appmodel
-            delegate: AppDelegate {}
+            delegate: AppConfigDelegate {}
             highlight: Rectangle { color: "lightsteelblue"; radius: 2 }
         }
     }
