@@ -41,7 +41,7 @@ def test_get_baker_attribute():
     print("-"*20)
     for baker in crossbaker.bakers:
         print("Mod in BakerMod:{}".format(baker.name in crossbaker.bakermod.__dict__))
-        print("Mod for {} is {}, type:{}, path:{}".format(baker.name, baker.mod or "Not Found", type(baker.mod), baker.mod.__path__))
+        print("Mod for {} is {}, type:{}".format(baker.name, baker.mod or "Not Found", type(baker.mod)))
     print("-"*20)
         # assert baker.mod, "\n{sep}\nNo mod for {bakername}\n{sep}\n".format(bakername=baker.name, sep="-"*20)
     assert True

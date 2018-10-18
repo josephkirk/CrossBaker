@@ -1,8 +1,8 @@
 {
     "marmoset":"C:/Program Files/Marmoset/Toolbag 3/toolbag.exe",
     "pythonexternal":"//vietsap002/hcm/group/ta/05_Share/Libs/python/Python3.6.5/python.exe",
-    "photoshop":"photoshop.exe",
-    "xnormals":"xnormal.exe",
+    "photoshop":"C:/Program Files/Adobe/Adobe Photoshop CC 2017/photoshop.exe",
+    "xnormals":"C:/Program Files/S.Orgaz/xNormal 3.19.2/x64/xnormal.exe",
     "substance":"C:/Program Files/Allegorithmic/Substance Designer/sbscooker.exe",
     "handplane":"handplaneCmd.exe"
 }

@@ -162,7 +162,8 @@ class Bakers(object):
 		if not cls.__instance__:
 			cls.__instance__ = super(Bakers, cls).__new__(cls)
 			# cls.__instance__.__init__()
-			cls.__instance__.__allApps = cls.getConfig(path)
+			cls.__instance__.__allApps = [
+				App(appname, apppath) for appname, apppath in cls.getConfig(path).items()]
 			cls.__instance__.__availApps = {}
 
 		return cls.__instance__
@@ -172,17 +173,17 @@ class Bakers(object):
 		if os.path.exists(path):
 			instance.__data = self.getConfig(path)
 		import crossbaker
-		for bakername, bakerpath in instance.__allApps.items():
-			if not os.path.exists(bakerpath):
+		for app in instance.__allApps:
+			if not os.path.exists(app.path):
 				continue
-			if bakername == "pythonexternal":
-				crossbaker.externalPython = bakername
+			if app.name == "pythonexternal":
+				crossbaker.externalPython = app
 				continue
-			elif bakername == "photoshop":
-				crossbaker.photoshop = bakername
+			elif app.name == "photoshop":
+				crossbaker.photoshop = app
 				continue
-			logger.debug('Baker Application: "{}" found.'.format(bakername.capitalize()))
-			instance.__availApps[bakername] = BakerApp(bakername, bakerpath)
+			logger.debug('Baker Application: "{}" found.'.format(app.name.capitalize()))
+			instance.__availApps[app.name] = BakerApp(app.name, app.path)
 		# Attemp to aquire execution module for baker application
 		for bakerapp in instance.__availApps:
 			if bakerapp in crossbaker.bakermod.__dict__:
@@ -202,7 +203,7 @@ class Bakers(object):
 		self.__bakerid += 1
 		return baker
 
-	def allBakers(self):
+	def allApps(self):
 		return self().__allApps
 
 	def bakernames(self):
@@ -274,6 +275,7 @@ from .enums import \
 
 from .libs.classes import \
 	Size, \
+	App, \
 	BakerApp, \
 	ImageApp
 
@@ -285,7 +287,7 @@ TempPath = os.path.join(os.getenv("LOCALAPPDATA"), __appname)
 UserConfig = os.path.normpath(os.path.join(TempPath, Config))
 UserSetting = os.path.normpath(os.path.join(TempPath, Setting))
 
-Clean = False
+Clean = True
 if Clean:
 	def remove_readonly(func, path, _):
 		"Clear the readonly bit and reattempt the removal"

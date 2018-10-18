@@ -1,7 +1,5 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
-
-
 ApplicationWindow {
     id: window
     // flags: Qt.Window
@@ -67,7 +65,7 @@ ApplicationWindow {
                 text: qsTr("Config")
                 width: parent.width
                 onClicked: {
-                    stackView.push("forms/ConfigsForm.qml", {bakerconfigs:bakerconfigs})
+                    stackView.push("forms/ConfigsForm.qml", {appconfigs:appconfigsmodel})
                     drawer.close()
                     toolheader.text = "Config"
                 }
