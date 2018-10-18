@@ -20,7 +20,7 @@ ApplicationWindow {
 
         Label {
             id: toolheader
-            text: "Setup"
+            text: "SETUP"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:parent.left
             anchors.leftMargin: 20
@@ -35,6 +35,7 @@ ApplicationWindow {
             onClicked: {
                 if (stackView.depth > 1) {
                     stackView.pop()
+                    toolheader.text = "SETUP"
                 } else {
                     drawer.open()
                 }
@@ -48,26 +49,26 @@ ApplicationWindow {
         id: drawer
         width: window.width * 0.66
         height: window.height
-
+        // interactive: false
         Column {
             anchors.fill: parent
 
             ItemDelegate {
-                text: qsTr("Setting")
+                text: qsTr("SETTINGS")
                 width: parent.width
                 onClicked: {
                     stackView.push("forms/SettingForm.qml")
                     drawer.close()
-                    toolheader.text = "Setting"
+                    toolheader.text = "SETTINGS"
                 }
             }
             ItemDelegate {
-                text: qsTr("Config")
+                text: qsTr("CONFIGS")
                 width: parent.width
                 onClicked: {
                     stackView.push("forms/ConfigsForm.qml", {appconfigs:appconfigsmodel})
                     drawer.close()
-                    toolheader.text = "Config"
+                    toolheader.text = "CONFIGS"
                 }
             }
         }
