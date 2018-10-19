@@ -48,8 +48,10 @@ Page {
         headerPositioning: ListView.PullBackHeader
         footer: footercomponent
         footerPositioning: ListView.PullBackFooter
-        width: parent.width
-        height: parent.height - 50
+        x: 10
+        y: 10
+        width: parent.width - 20
+        height: parent.height - 20
         delegate: AppConfigDelegate {}
 
         populate: Transition {

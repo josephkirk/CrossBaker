@@ -18,7 +18,7 @@ Page {
     }
     header: Rectangle {
         height: 50
-        color: "#A89898"
+        gradient: clubcolors
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter 
@@ -40,19 +40,22 @@ Page {
         }
         delegate: Rectangle {
             height: 50
-            width: parent.width
-            color: "transparent"
+            width: parent.width-20
+            color: "#3F5866"
             x: 10
+            radius: 5
             Row {
                 anchors.verticalCenter: parent.verticalCenter 
                 spacing: 10
+                padding: 10
                 Rectangle {
                     radius: 5
                     width: 40
                     height: 40
-                    color: "gray"
+                    color: "#BDD3DE"
                 }
                 Text { 
+                    color: "white"
                     anchors.verticalCenter: parent.verticalCenter
                     text: name
                     font.pixelSize: 14
@@ -62,13 +65,16 @@ Page {
     }
 
     Rectangle {
-        color: "#E8D3DA"
+        color: "#F0F0DF"
         width: parent.width
         height: parent.height
         ListView {
             id: layerview
+            anchors.fill: parent.fill
             width: parent.width
             height: parent.height
+            spacing: 5
+            y: 10
             // header: bannercomponent
             // headerPositioning: ListView.PullBackHeader
             // footer: footercomponent
