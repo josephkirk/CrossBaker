@@ -85,6 +85,7 @@ class App(QObject):
 
     appname = Property(str, getname, setname, notify=nameChanged)
     apppath = Property(str, getpath, setpath, notify=pathChanged)
+
 class BakerApp(App):
     def __init__(self, name, path, execmod=None):
         super(BakerApp, self).__init__(name, path)

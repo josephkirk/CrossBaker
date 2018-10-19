@@ -4,5 +4,6 @@
     "marmoset":"C:/Program Files/Marmoset/Toolbag 3/toolbag.exe",
     "xnormals":"C:/Program Files/S.Orgaz/xNormal 3.19.3/x64/xnormal.exe",
     "substance":"C:/Program Files/Allegorithmic/Substance BatchTools 5/sbsbaker.exe",
-    "handplane":"handplaneCmd.exe"
+    "handplane":"handplaneCmd.exe",
+    "handplane2":"handplaneCmd2.exe"
 }

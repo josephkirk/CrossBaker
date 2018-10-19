@@ -14,6 +14,7 @@ Page {
     BannerColors {
         id: clubcolors
     }
+
     Component {
         id: bannercomponent
         Rectangle {
@@ -34,7 +35,7 @@ Page {
         id: footercomponent
         Rectangle {
             id: footer
-            width: parent.width;
+            width: parent.width
             height: 20
             gradient: clubcolors
             radius: 5
@@ -42,7 +43,6 @@ Page {
     }
 
     // Body
-
     ListView {
         header: bannercomponent
         headerPositioning: ListView.PullBackHeader
@@ -51,7 +51,7 @@ Page {
         width: parent.width
         height: parent.height - 50
         delegate: AppConfigDelegate {}
-     
+
         populate: Transition {
             SequentialAnimation {
                 id: popTrans
