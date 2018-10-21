@@ -1,9 +1,9 @@
 import QtQuick 2.11
-import QtQuick.Controls 1.4
 import QtQuick.Controls 2.4
 import QtQml.Models 2.11
+import QtQuick.Layouts 1.11
 import "stylings"
-
+import "items"
 Page {
     id: homepage
     title: qsTr("Set up")
@@ -16,9 +16,7 @@ Page {
     BannerColors {
         id: clubcolors
     }
-    header: Rectangle {
-        height: 50
-        gradient: clubcolors
+    header: PageHeader {
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter 
@@ -55,7 +53,7 @@ Page {
                     color: "#BDD3DE"
                 }
                 Text { 
-                    color: "white"
+                    color: "black"
                     anchors.verticalCenter: parent.verticalCenter
                     text: name
                     font.pixelSize: 14
@@ -64,22 +62,11 @@ Page {
         }
     }
 
-    Rectangle {
-        color: "#F0F0DF"
-        width: parent.width
-        height: parent.height
+    PageBody {
         ListView {
-            id: layerview
-            anchors.fill: parent.fill
-            width: parent.width
-            height: parent.height
+            x: 5; y: 10
+            width: parent.width; height: 600
             spacing: 5
-            y: 10
-            // header: bannercomponent
-            // headerPositioning: ListView.PullBackHeader
-            // footer: footercomponent
-            // footerPositioning: ListView.PullBackFooter
-
             Component.onCompleted: {
                 model = visualModel
                 // console.log(layerModel)
@@ -87,9 +74,7 @@ Page {
         }
     }
 
-    footer: Rectangle {
-        height: 100
-        color: "#423C40"
+    footer: PageFooter {
         Row {
             spacing: 10
             anchors.horizontalCenter: parent.horizontalCenter

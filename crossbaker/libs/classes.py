@@ -60,6 +60,7 @@ class App(QObject):
 
     def setname(self, newName):
         self.name = newName
+        print(newName)
 
     def getpath(self):
         return self.path

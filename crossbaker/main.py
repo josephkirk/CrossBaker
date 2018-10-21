@@ -37,6 +37,10 @@ class Baker(QC.QObject):
     def run(self):
         crossbaker.bakers.current().run()
 
+    @Slot(result=str)
+    def allAppsInfo(self):
+        return str([(app.name, app.path) for app in crossbaker.bakers.allApps()])
+
 class Main:
     def __init__(self):
         app = QG.QGuiApplication( sys.argv )

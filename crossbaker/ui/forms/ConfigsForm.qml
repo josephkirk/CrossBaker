@@ -3,27 +3,19 @@ import QtQuick.Controls 2.4
 import QtQml.Models 2.11
 import "delegates"
 import "stylings"
-
+import "items"
 Page {
     id: configpage
     title: qsTr("Config")
     width: 400
-    height: 800
+    height: 750
     property var appconfigs
-    // Components Init
-    BannerColors {
-        id: clubcolors
-    }
-
-    Component {
-        id: bannercomponent
-        Rectangle {
-            id: banner
-            width: parent.width; height: 50
-            gradient: clubcolors
-            radius: 5
+    property var baker
+    header: PageHeader {
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter 
             Text {
-                anchors.centerIn: parent
                 text: qsTr("Application Path")
                 font.pixelSize: 24
                 color: "white"
@@ -31,46 +23,50 @@ Page {
         }
     }
 
-    Component {
-        id: footercomponent
-        Rectangle {
-            id: footer
-            width: parent.width
-            height: 20
-            gradient: clubcolors
-            radius: 5
+    // Body
+    PageBody {
+        ListView {
+            x: 5; y: 10
+            width: 600; height: 600
+            spacing: 5
+            delegate: AppConfigDelegate {
+                textColor:"black"
+                width: 600
+            }
+            populate: Transition {
+                SequentialAnimation {
+                    id: popTrans
+                    PauseAnimation {
+                        duration: (popTrans.ViewTransition.targetIndexes * 20)
+                        }
+                        NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 150 }
+                        NumberAnimation { 
+                            properties: "y"; duration: 150;
+                            easing.type: Easing.InOutQuad; }
+                    }
+            }
+
+            Component.onCompleted: {
+                // Delay load model for animation
+                model = appconfigs
+            }
         }
     }
 
-    // Body
-    ListView {
-        header: bannercomponent
-        headerPositioning: ListView.PullBackHeader
-        footer: footercomponent
-        footerPositioning: ListView.PullBackFooter
-        x: 10
-        y: 10
-        width: parent.width - 20
-        height: parent.height - 20
-        delegate: AppConfigDelegate {}
-
-        populate: Transition {
-            SequentialAnimation {
-                id: popTrans
-                PauseAnimation {
-                    duration: (popTrans.ViewTransition.targetIndexes * 20)
-                    }
-                    NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 150 }
-                    NumberAnimation { 
-                        properties: "y"; duration: 150;
-                        easing.type: Easing.InOutQuad; }
+    footer: PageFooter {
+        Row {
+            spacing: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter      
+            Button {
+                width: 150
+                text: "Save Configs"
+                onClicked: {
+                    console.log(baker.allAppsInfo())
                 }
-        }
-
-        Component.onCompleted: {
-            // Delay load model for animation
-            model = appconfigs
+            }
         }
     }
     // Styling
+    
 }
