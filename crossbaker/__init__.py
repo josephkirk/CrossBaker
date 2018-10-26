@@ -287,13 +287,16 @@ TempPath = os.path.join(os.getenv("LOCALAPPDATA"), __appname)
 UserConfig = os.path.normpath(os.path.join(TempPath, Config))
 UserSetting = os.path.normpath(os.path.join(TempPath, Setting))
 
-Clean = True
+Clean = False
 if Clean:
 	def remove_readonly(func, path, _):
 		"Clear the readonly bit and reattempt the removal"
 		os.chmod(path, stat.S_IWRITE)
 		func(path)
-	shutil.rmtree(TempPath, onerror=remove_readonly)
+	try:
+		shutil.rmtree(TempPath, onerror=remove_readonly)
+	except:
+		pass
 
 if not os.path.isdir(TempPath):
 	os.mkdir(TempPath)

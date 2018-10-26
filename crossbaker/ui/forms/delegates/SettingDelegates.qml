@@ -32,16 +32,12 @@ Item {
                 font.pointSize: 10
             }
             TextField {
-                id: apppathedit
                 Layout.fillWidth: true
                 text: model.modelData.apppath
                 verticalAlignment : TextInput.AlignBottom
                 color:textColor
                 font.pointSize: 8
-                onEditingFinished: {
-                    model.modelData.apppath = apppathedit.text
-                    console.log("change Path to "+ model.modelData.apppath)
-                }
+
             }
         }
     }

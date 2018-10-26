@@ -1,84 +1,72 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
-
+import "items"
+import "delegates"
 Page {
+    id: configpage
+    title: qsTr("Setting")
     width: 400
-    height: 800
-    title: qsTr("Page 1")
+    height: 750
+    property var settings: undefined
 
-    Label {
-        text: qsTr("You are on Page 1.")
-        anchors.centerIn: parent
-    }
-
-    TextEdit {
-        id: textEdit
-        x: 125
-        y: 90
-        width: 80
-        height: 20
-        text: qsTr("Text Edit")
-        font.bold: true
-        font.family: "Courier"
-        horizontalAlignment: Text.AlignLeft
-        font.pixelSize: 12
-    }
-
-    CheckBox {
-        id: checkBox
-        x: 9
-        y: 398
-        width: 196
-        height: 32
-        text: qsTr("Check Box")
-    }
-
-    ListView {
-        id: listView
-        x: 14
-        y: 112
-        width: 191
-        height: 242
-        delegate: Item {
-            x: 5
-            width: 80
-            height: 40
-            Row {
-                id: row1
-                spacing: 10
-                Rectangle {
-                    width: 40
-                    height: 40
-                    color: colorCode
-                }
-
-                Text {
-                    text: name
-                    font.bold: true
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-            }
-        }
-        model: ListModel {
-            ListElement {
-                name: "Grey"
-                colorCode: "grey"
-            }
-
-            ListElement {
-                name: "Red"
-                colorCode: "red"
-            }
-
-            ListElement {
-                name: "Blue"
-                colorCode: "blue"
-            }
-
-            ListElement {
-                name: "Green"
-                colorCode: "green"
+    header: PageHeader {
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter 
+            Text {
+                text: qsTr("Bake Setting")
+                font.pixelSize: 24
+                color: "white"
             }
         }
     }
+
+    // Body
+    PageBody {
+        ListView {
+            x: 5; y: 10
+            width: 600; height: 600
+            spacing: 5
+            delegate: AppConfigDelegate {
+                textColor:"black"
+                width: 600
+            }
+            populate: Transition {
+                SequentialAnimation {
+                    id: popTrans
+                    PauseAnimation {
+                        duration: (popTrans.ViewTransition.targetIndexes * 20)
+                        }
+                        NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 150 }
+                        NumberAnimation { 
+                            properties: "y"; duration: 150;
+                            easing.type: Easing.InOutQuad; }
+                    }
+            }
+
+            Component.onCompleted: {
+                // Delay load model for animation
+                if (settings != undefined) {
+                    model = settings
+                }
+            }
+        }
+    }
+
+    footer: PageFooter {
+        Row {
+            spacing: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter      
+            Button {
+                width: 150
+                text: "Save Settings"
+                onClicked: {
+                    console.log(Settings)
+                }
+            }
+        }
+    }
+    // Styling
+    
 }

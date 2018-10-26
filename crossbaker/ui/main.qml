@@ -66,7 +66,7 @@ ApplicationWindow {
                 text: qsTr("CONFIGS")
                 width: parent.width
                 onClicked: {
-                    stackView.push("forms/ConfigsForm.qml", {appconfigs:appconfigsmodel})
+                    stackView.push("forms/ConfigsForm.qml", {appconfigs:appconfigsmodel, baker:baker})
                     drawer.close()
                     toolheader.text = "CONFIGS"
                 }
