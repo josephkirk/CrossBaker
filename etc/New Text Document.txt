@@ -1,0 +1,110 @@
+
+
+Day 1 -3:
+
+1.       Environment deployment guide
+
+2.       Share the current knowledge for modeling, PBR texture and material authorization workflow. (from DCC to engine)
+
+3.       Current experience to re-use TR2 and TR-Shadow assets
+
+4.       Share knowledge of plugins and scripts used in current TR2 art workflow.
+
+5.       Explain project structure, especially art data directory and other art workflow conventions.
+
+ 
+
+Day 4 – 10:
+
+With previous guide, we should be ready to practice the supporting for the artists on production exercise. Shanghai TA will assist the new TA to perform the supports for art pipeline.
+
+ 
+Day 1 – Project Atlantis Overview
+
+?           Presentation of our current project: Atlantis 
+
+?  Review project objectives and timeline for our current project, introduction to our team and the key members
+
+?  Reference the old Tomb Raider Anniversary content, explanation of the relationship between Tomb Raider Anniversary and latest Tomb Raider Reboot
+
+?  Review what we’ve done on the project so far, showcasing concept images and art direction
+
+?  Review Rise of the Tomb Raider and Shadow of the Tomb Raider content and how they’ll relate to Project Atlantis, emphasizing key elements how what level artists will need to perform to achieve AAA quality level
+
+?  What game features are in Tomb Raider Anniversary 
+
+?           Questions/Answers
+
+?           Peru 5 Level Breakdown
+
+?  Showcase the original TRAE level and our updated Peru 5 unit and quality bench marks
+
+?  Detailed breakdown on Shadow and Rise assets used in the scene
+
+?  Detailed breakdown on general Art Direction and creative direction
+
+?  Detailed breakdown on PBR environment material and techniques used
+
+?  Detailed breakdown on lighting and importance for levels
+
+?  Detailed breakdown on VFX on level application
+
+?  Detailed breakdown on challenges with higher quality vs. gameplay documentation  
+
+?  Masking gameplay elements // Power presentation with detailed callouts
+
+?  What level artists need to consider when adding/modifying collision
+
+?  Emphasizing and showing on quality contrast from TRAE to Atlantis
+
+ 
+
+Day 2 – TRAE Content Review and Shadow & Rise Asset Review 
+
+?           Peru, Greece, Egypt, Lost Islands – Showcasing current environment themes for project Atlantis
+
+?  Breaking down units and sizing  
+
+?           Assets gyms from Shadow and Rise
+
+?  Showing our approach to level creation with the utilization of asset gyms and how they were used to create Peru 5
+
+?  Showing how to access asset Gyms 
+
+?  Getting artists familiar with current content and asset library
+
+ 
+
+Day 2 & 3 – Editor Workflow and explanation
+
+?  Breaking down the editor and where all of the main tools are for level artists
+
+?  How to use p4 properly
+
+?  Naming conventions, commenting, file placement, safe guarding levels so work is not lost on updates
+
+?  How to move the camera, manipulate objects, how to adjust materials on mesh and terrain,  to search for props, how to create terrain mesh
+
+?  After mesh creation, how to name and where to place in p4
+
+?  How to use Maya plugin – exporting mesh, creating collision mesh, shadow mesh related with TR2 editor
+
+?  How to import the TRAE level and place it into the TR2 engine
+
+?  Knowledge sharing of how to create levels faster and more efficiently levering existing knowledge of Shadow level artists
+
+?  Knowledge sharing of pitfalls and bottlenecks to be careful of leveraging the experience of the Shadow level artists
+
+?  How to achieve AAA quality through polishing and detailing
+
+?  Walk Level Artists through the initial steps of creating the level 
+
+ 
+
+ 
+
+Day 3 through 10 – Assigned Peru Levels creation – This will be the biggest benefit for Ho Chi Minh, Dublin and Shanghai, as we will be able to walk through the entire process and have people leave Shanghai with the proper knowledge to take back to their offices and share with their colleagues 
+
+?  Each Level Artist will be assigned to recreate one of the Peru levels using the knowledge and workflow experience shared during the visit
+
+?  There will be a level artist shadowing & mentoring them during these days to advise on their execution of the level, answer any questions or provide direction where needed
