@@ -305,6 +305,6 @@ if not os.path.isdir(TempPath+"/config"):
 
 ## Init Setting
 logger.debug(getScriptDir())
-exportSetting =  ExportSetting(UserSetting)
+exportSetting =  ExportSetting(Setting)
 bakers = Bakers(UserConfig)
 init()

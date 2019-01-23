@@ -1,8 +1,8 @@
 {
-    "pythonexternal":"//vietsap002/hcm/group/ta/05_Share/Libs/python/Python3.6.5/python.exe",
-    "photoshop":"C:/Program Files/Adobe/Adobe Photoshop CC 2017/photoshop.exe",
-    "marmoset":"C:/Program Files/Marmoset/Toolbag 3/toolbag.exe",
-    "xnormals":"C:/Program Files/S.Orgaz/xNormal 3.19.3/x64/xnormal.exe",
-    "substance":"C:/Program Files/Allegorithmic/Substance BatchTools 5/sbsbaker.exe",
-    "handplane":"handplaneCmd.exe"
+    "Python External":"//vietsap002/hcm/group/ta/05_Share/Libs/python/Python3.6.5/python.exe",
+    "Photoshop":"C:/Program Files/Adobe/Adobe Photoshop CC 2017/photoshop.exe",
+    "Marmoset":"C:/Program Files/Marmoset/Toolbag 3/toolbag.exe",
+    "Xnormals":"C:/Program Files/S.Orgaz/xNormal 3.19.3/x64/xnormal.exe",
+    "Substance":"C:/Program Files/Allegorithmic/Substance BatchTools 5/sbsbaker.exe",
+    "Handplane":"handplaneCmd.exe"
 }

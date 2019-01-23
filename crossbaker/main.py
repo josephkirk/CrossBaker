@@ -41,6 +41,8 @@ class Baker(QC.QObject):
     def allAppsInfo(self):
         return str([(app.name, app.path) for app in crossbaker.bakers.allApps()])
 
+    Property()
+
 class Main:
     def __init__(self):
         app = QG.QGuiApplication( sys.argv )

@@ -1,0 +1,145 @@
+BakerConfiguration bakeConfig
+{
+	int32 version = 1;
+	ProjectionGroup groups
+	[ 
+		{
+			String name = "Projection Group";
+			HighPolyModelConfiguration highModels
+			[ 
+				{
+					Filename model = "obj.fbx";
+					bool overrideMaterial = false;
+					int32 material = 0;
+					bool isFloater = false;
+				}
+			]
+			LowPolyModelConfiguration lowModels
+			[ 
+				{
+					Filename model = "obj.fbx";
+					Filename cageModel = "";
+					bool overrideCageOffset = false;
+					float autoCageOffset = 1.000000;
+				}
+			]
+			int32 material = 0;
+			bool isolateAO = false;
+			float autoCageOffset = 1.000000;
+		}
+	]
+	float aoSampleRadius = 1.000000;
+	int32 aoSampleCount = 20;
+	float thicknessSampleRadius = 1.000000;
+	int32 thicknessSampleCount = 20;
+	bool volumetricGradientCubeFit = false;
+	float heightMapScale = 1.000000;
+	float heightMapOffset = 0.000000;
+	bool curvatureUseRaySampling = false;
+	float curvatureSampleRadius = 0.050000;
+	int32 curvatureSampleCount = 20;
+	int32 curvaturePixelRadius = 4;
+	bool curvatureAutoNormalize = true;
+	float curvatureMaxAngle = 100.000000;
+	float curvatureOutputGamma = 1.000000;
+	float cavitySensitivity = 0.750000;
+	float cavityBias = 0.015000;
+	int32 cavityPixelRadius = 4;
+	float cavityOutputGamma = 1.000000;
+	KernelType cavityKernelType = ConstantDisk;
+	int32 textureSpaceAOPixelRadius = 10;
+	float textureSpaceAOOutputGamma = 1.000000;
+	float textureSpaceAOSampleCoveragePercentage = 100.000000;
+	int32 threadCount = 0;
+	float backRayOffsetScale = 5.000000;
+	bool downsampleInGeneratorSpace = true;
+	bool buildSmoothedNormalsForHighRes = false;
+	bool suppressTriangulationWarning = false;
+	MaterialLibrary materialLibrary
+	{
+		String channelNames
+		[ 
+			"Diffuse", 
+			"Spec", 
+			"Gloss"
+		]
+		MaterialConfiguration materials
+		[ 
+			{
+				String name = "Default";
+				Color matIDColor = 0xFFFFFFFF;
+				Color channelColors
+				[ 
+					0xFFFF0000, 
+					0xFF00FF00, 
+					0xFF0000FF
+				]
+			}
+		]
+	}
+	Filename outputFolder = "";
+	String outputFilename = "output";
+	String outputExtension = "tif";
+	ImageBitDepth outputBitDepth = 16;
+	int32 outputWidth = 1024;
+	int32 outputHeight = 1024;
+	int32 outputPadding = 64;
+	int32 outputSuperSample = 1;
+	bool outputDither = true;
+	ImageOutput outputs
+	[ 
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_ts";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_os";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_ao";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_aof";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_color";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_mat";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_matid";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_curve";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_vg";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_cav";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_hm";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_tsao";
+		}
+		{
+			bool isEnabled = false;
+			String filenameSuffix = "_thick";
+		}
+	]
+	String tangentSpace = "Unity";
+}

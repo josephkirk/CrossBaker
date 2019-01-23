@@ -34,16 +34,10 @@ Page {
                 width: 600
             }
             populate: Transition {
-                SequentialAnimation {
-                    id: popTrans
-                    PauseAnimation {
-                        duration: (popTrans.ViewTransition.targetIndexes * 20)
-                        }
-                        NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 150 }
-                        NumberAnimation { 
-                            properties: "y"; duration: 150;
-                            easing.type: Easing.InOutQuad; }
-                    }
+                NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 500 }
+                NumberAnimation { 
+                    properties: "y"; duration: 500;
+                    easing.type: Easing.InOutQuad; }
             }
 
             Component.onCompleted: {

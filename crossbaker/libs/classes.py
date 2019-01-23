@@ -60,13 +60,14 @@ class App(QObject):
 
     def setname(self, newName):
         self.name = newName
-        print(newName)
+        logger.debug(newName)
 
     def getpath(self):
         return self.path
 
     def setpath(self, newpath):
         self.path = newpath
+        logger.debug(newpath)
 
     @Signal
     def nameChanged(self):

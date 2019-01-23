@@ -13,9 +13,6 @@ Page {
     property var baker
     property var bakers
     // Components Init
-    BannerColors {
-        id: clubcolors
-    }
     header: PageHeader {
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
